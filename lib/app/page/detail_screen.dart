@@ -26,13 +26,7 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
-  void InTotalPrice() {
-    setState(() {
-      total_price = widget.popular.price * quantity;
-    });
-  }
-
-  void DeTotalPrice() {
+  void TotalPrice() {
     setState(() {
       total_price = widget.popular.price * quantity;
     });
@@ -119,7 +113,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         GestureDetector(
                           onTap: () {
                             decrement();
-                            DeTotalPrice();
+                            TotalPrice();
                           },
                           child: Container(
                             width: 35,
@@ -145,7 +139,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         GestureDetector(
                           onTap: () {
                             increment();
-                            InTotalPrice();
+                            TotalPrice();
                           },
                           child: Container(
                             width: 35,
@@ -185,7 +179,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Text("$total_price"),
+                    Text("$total_price \$"),
                   ],
                 )
               ],
