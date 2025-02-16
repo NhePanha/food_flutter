@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui_flutter/app/model/list_category.dart';
 import 'package:ui_flutter/app/model/list_popular.dart';
+import 'package:ui_flutter/app/page/detail_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -187,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                           Image(image: NetworkImage(category[index].image)),
                           const SizedBox(height: 8),
                           Text(
-                            'Item ${index + 1}',
+                            category[index].name,
                             style: const TextStyle(
                                 color: Color(0xFF000000),
                                 fontWeight: FontWeight.bold),
@@ -200,31 +201,155 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             // category item
+            const Padding(
+              padding: EdgeInsets.all(10),
+              child: const Row(
+                // Popular item
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Text(
+                      "Populars",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 14),
+                    child: Text(
+                      "See All",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(
               height: 10,
             ),
-            const Row(
-              // Popular item
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: Text(
-                    "Populars",
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 14),
-                  child: Text(
-                    "See All",
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-              ],
+            Container(
+              width: 430,
+              height: 250,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: popular.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: InkWell(
+                      onTap: () {
+                        // Navigate to detail page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailScreen(
+                              popular[index],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: 350,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: NetworkImage(popular[index].image),
+                                    fit: BoxFit.cover),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 2,
+                              left: 10,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    popular[index].name,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18,
+                                        color: Color(0xFF00223E)),
+                                  ),
+                                  Text(
+                                    popular[index].description,
+                                    style: const TextStyle(
+                                        color: Color(0x7D000000)),
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.star,
+                                        color: Colors.red,
+                                      ),
+                                      Text(
+                                        "${popular[index].rate}",
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      const Text("(941 Rating)")
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: Container(
+                                height: 45,
+                                width: 80,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFFF5D5D),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      bottomRight: Radius.circular(10)),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "\$${popular[index].price}",
+                                    style: const TextStyle(fontSize: 15),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
-            const SizedBox(
-              height: 10,
+            const Padding(
+              padding: EdgeInsets.all(10),
+              child: const Row(
+                // Popular item
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Text(
+                      "Populars",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 14),
+                    child: Text(
+                      "See All",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Container(
               width: 430,
@@ -278,27 +403,27 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Text(
                                       popular[index].name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white, // Adjust as needed
                                       ),
                                     ),
-                                    SizedBox(width: 8),
+                                    const SizedBox(width: 8),
                                     Text(
                                       "${popular[index].price} \$",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                         color: Colors
                                             .yellowAccent, // Highlight price
                                       ),
                                     ),
-                                    SizedBox(width: 8),
+                                    const SizedBox(width: 8),
                                     Row(
                                       children: List.generate(
                                         4,
-                                        (starIndex) => Icon(
+                                        (starIndex) => const Icon(
                                           Icons.star,
                                           color: Colors
                                               .orange, // Change to filled star color
@@ -306,10 +431,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 10),
+                                    const SizedBox(width: 10),
                                     Text(
                                       "R ${popular[index].rating}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors
