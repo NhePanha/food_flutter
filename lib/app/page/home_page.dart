@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ui_flutter/app/model/list_category.dart';
 import 'package:ui_flutter/app/model/list_popular.dart';
 import 'package:ui_flutter/app/page/detail_screen.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {

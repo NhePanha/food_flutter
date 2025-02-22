@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ui_flutter/app/page/home_page.dart';
+
 class GetStart extends StatefulWidget {
   const GetStart({super.key});
   @override
   State<GetStart> createState() => _GetStartState();
 }
+
 class _GetStartState extends State<GetStart> {
   @override
   Widget build(BuildContext context) {
@@ -22,37 +24,53 @@ class _GetStartState extends State<GetStart> {
                 width: 200,
                 height: 200,
               ),
-              const Text(
-                "Welcome to Your App",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              const Column(
+                children: [
+                  Text(
+                    "Welcome To Application",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      "Are you looking for a welcome screen for your food app? Do you need a design suggestion",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                ],
               ),
-              const Text(""),
+              SizedBox(
+                height: 100,
+              ),
               InkWell(
                 onTap: () {
+                  // event
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const HomePage()));
                 },
                 child: Container(
-                  width: 350,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  width: 400,
                   height: 60,
                   decoration: BoxDecoration(
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
-                        offset: Offset(0, 3),
+                        color: Colors.black.withOpacity(0.2),
                         blurRadius: 10,
-                        color: Colors.black38,
+                        offset: const Offset(0, 5),
                       )
                     ],
-                    color: const Color(0x9E6C6CFF),
-                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(
                     child: Text(
-                      "Get Start",
+                      "Get Started",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),

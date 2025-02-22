@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_flutter/app/model/list_popular.dart';
+import 'package:ui_flutter/app/page/card_noti.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen(this.popular, {super.key});
@@ -10,6 +12,7 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   @override
+  bool isFavorite = false; // Initial state
   int quantity = 0;
   double total_price = 0.0;
   void increment() {
@@ -35,13 +38,23 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.popular.name),
-        actions: const [
+        title: Text(
+          widget.popular.name,
+          style: GoogleFonts.acme(fontSize: 30, fontWeight: FontWeight.w500),
+        ),
+        actions: [
           Padding(
             padding: EdgeInsets.only(right: 20),
-            child: Icon(
-              Icons.favorite,
-              color: Colors.pink,
+            child: IconButton(
+              icon: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: isFavorite ? Colors.pink : Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  isFavorite = !isFavorite; // Toggle the value
+                });
+              },
             ),
           ),
         ],
@@ -51,14 +64,23 @@ class _DetailScreenState extends State<DetailScreen> {
           children: [
             Text(
               widget.popular.description,
+              style: GoogleFonts.aBeeZee(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w200,
+                  color: const Color(0x73000000)),
             ),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.star),
+                const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
                 Text(
                   '${widget.popular.rate}',
+                  style: GoogleFonts.aBeeZee(
+                      fontSize: 20, fontWeight: FontWeight.w200),
                 ),
               ],
             ),
@@ -67,9 +89,8 @@ class _DetailScreenState extends State<DetailScreen> {
               padding: const EdgeInsets.all(20),
               width: double.infinity,
               height: 400,
-              child: Image(
-                image: NetworkImage(widget.popular.image),
-              ),
+              color: Colors.transparent, // No background
+              child: Image.network(widget.popular.image),
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -82,14 +103,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   style: TextStyle(fontSize: 20),
                 ),
                 Column(
-                  children: [Text("calories"), Text("120")],
+                  children: [Text("Volume"), Text("12 Inch")],
                 ),
                 Text(
                   "|",
                   style: TextStyle(fontSize: 20),
                 ),
                 Column(
-                  children: [Text("calories"), Text("120")],
+                  children: [Text("Distance"), Text("1 KM")],
                 ),
               ],
             ),
@@ -166,7 +187,10 @@ class _DetailScreenState extends State<DetailScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text("Express"),
+                    Text(
+                      "Express",
+                      style: TextStyle(color: Color(0xFF01A857), fontSize: 16),
+                    ),
                   ],
                 ),
                 Column(
@@ -179,7 +203,13 @@ class _DetailScreenState extends State<DetailScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Text("$total_price \$"),
+                    Text(
+                      "\$${total_price.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
+                    ),
                   ],
                 )
               ],
@@ -189,7 +219,16 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
             InkWell(
               onTap: () {
-                // event
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CardNotivacation(
+                      popular: widget.popular,
+                      quantity: quantity,
+                      total_price: total_price,
+                    ),
+                  ),
+                );
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
