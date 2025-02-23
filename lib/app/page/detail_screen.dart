@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_flutter/app/model/list_popular.dart';
-import 'package:ui_flutter/app/page/card_noti.dart';
+import 'package:ui_flutter/app/page/payment.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen(this.popular, {super.key});
@@ -222,10 +222,10 @@ class _DetailScreenState extends State<DetailScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CardNotivacation(
+                    builder: (context) => PaymentScreen(
                       popular: widget.popular,
                       quantity: quantity,
-                      total_price: total_price,
+                      total_price: total_price, totalPrice: total_price,
                     ),
                   ),
                 );

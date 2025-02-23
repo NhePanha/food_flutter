@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:ui_flutter/app/model/list_category.dart';
 import 'package:ui_flutter/app/model/list_popular.dart';
+import 'package:ui_flutter/app/page/payment.dart';
 import 'package:ui_flutter/app/page/detail_screen.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -27,23 +30,26 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text("Deliver To"),
                       Text(
-                        "New York, USA",
+                        "Cambodia, KH",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       )
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    width: 70,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(
-                          image: AssetImage("assets/images/logo.png"),
-                          fit: BoxFit.cover),
+                InkWell(
+                  onTap: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: const DecorationImage(
+                            image: AssetImage("assets/images/logo.png"),
+                            fit: BoxFit.cover),
+                      ),
                     ),
                   ),
                 )
@@ -254,8 +260,8 @@ class _HomePageState extends State<HomePage> {
                               height: 150,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    image: NetworkImage(popular[index].image),
-                                    fit: BoxFit.cover),
+                                  image: NetworkImage(popular[index].image),
+                                ),
                                 borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   topRight: Radius.circular(10),
